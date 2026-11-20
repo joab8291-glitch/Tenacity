@@ -493,6 +493,97 @@ h1 em{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-style:nor
 }
 @media(max-width:420px){.footer .footgrid{gap:22px}}
 </style>
+
+<style id="tenacity-monochrome-refinement">
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap');
+/* Mindloop-inspired monochrome direction; retain Tenacity content and navigation. */
+:root{--ky-lime:#fff;--ky-white:#fff;--ky-muted:#a6a6a6}
+body{font-family:'Inter',sans-serif;background:#000;color:#f5f5f5}
+h1,h2,h3{font-family:'Inter',sans-serif}
+.ky-stage{background:#000;color:#fff}
+.ky-stage:before{background:linear-gradient(135deg,#000 0%,#101010 52%,#000 100%)}
+.ky-glow{background:radial-gradient(ellipse at 70% 48%,rgba(255,255,255,.055),transparent 34%)}
+.ky-grain{opacity:.08}
+.ky-eyebrow{color:#bdbdbd}
+.ky-scene h1 em,.ky-scene h2 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:#fff;text-transform:none;letter-spacing:-.025em}
+.ky-lead,.ky-detail-copy>p:not(.ky-eyebrow),.ky-outro-copy{color:#bdbdbd}
+.ky-btn{border:1px solid rgba(255,255,255,.2);border-radius:999px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .25s,background .25s,border-color .25s}
+.ky-btn-primary{background:#fff;color:#000;border-color:#fff}
+.ky-btn-primary:hover{background:#dedede}
+.ky-btn-ghost{background:rgba(255,255,255,.035);color:#fff;box-shadow:inset 0 1px 1px rgba(255,255,255,.13)}
+.ky-btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
+.ky-progress button{background:rgba(255,255,255,.35)}
+.ky-progress button.is-current{background:#fff}
+.ky-spec-list li{border-color:rgba(255,255,255,.16)}
+.ky-spec-list b,.ky-fact-grid span{color:#aaa}
+.ky-hotspot{background:#fff;color:#000;border-color:#fff}
+.ky-tip{background:rgba(10,10,10,.8);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(12px)}
+.ky-bubble{border-color:rgba(255,255,255,.25);background:radial-gradient(circle at 35% 30%,#555,#111 58%,#000)}
+.ky-bubble-mark{color:#fff}
+.ky-fact-grid>div{border-color:rgba(255,255,255,.16)}
+.ky-facts-marquee{color:rgba(255,255,255,.14)}
+/* Compact, contained showroom-signage image */
+#about{background:#080808;color:#f5f5f5;padding:54px 0}
+#about:before{border-color:rgba(255,255,255,.08);box-shadow:0 0 0 48px rgba(255,255,255,.018),0 0 0 96px rgba(255,255,255,.012)}
+#about .about{grid-template-columns:minmax(0,.78fr) minmax(0,1fr);gap:clamp(28px,5vw,70px)}
+#about .about-masthead{width:100%;max-width:420px;height:auto;max-height:210px;justify-self:center;object-fit:contain;object-position:center;background:#111;border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:12px;box-shadow:inset 0 1px 1px rgba(255,255,255,.14),0 18px 48px rgba(0,0,0,.35)}
+#about .eyebrow{color:#aaa}
+#about h2{font-family:'Inter',sans-serif;font-size:clamp(34px,4vw,54px);font-weight:600}
+#about h2 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+#about p{color:#aaa}
+#about .btn{background:#fff;color:#000;border-color:#fff;border-radius:999px}
+#about .btn:hover{background:#ddd}
+#contact{background:#111;color:#fff;border-top:1px solid #292929;border-bottom:1px solid #292929;padding:44px 0}
+#contact:after{border-color:rgba(255,255,255,.12);box-shadow:0 0 0 42px rgba(255,255,255,.018),0 0 0 84px rgba(255,255,255,.012)}
+#contact .eyebrow{color:#aaa!important}
+#contact p{color:#aaa}
+#contact .btn{background:#fff;color:#000;border-color:#fff;border-radius:999px}
+#contact .btn:hover{background:#ddd}
+.footer{background:#000;color:#fff;border-top:1px solid #262626}
+.footer .footgrid h4{color:#aaa}
+.footer .footgrid p,.footer .footgrid a,.footer .footgrid span{color:#999}
+.footer .footgrid a:hover{color:#fff}
+.footer .footgrid img{background:#fff;border-radius:8px}
+.footer .copy{border-color:#262626;color:#777}
+/* Catalogue and order panels adopt the same restrained black/white system. */
+.catalog{background:#080808;color:#f5f5f5}
+.catalog .eyebrow,.catalog .intro p,.catalog .countline{color:#999}
+.catalog .searchbox input{background:#111;color:#fff;border-color:#333;border-radius:999px}
+.catalog .searchbox input:focus{border-color:#aaa;box-shadow:0 0 0 3px rgba(255,255,255,.08)}
+.catalog .searchicon{color:#aaa}
+.catalog .filter{background:#111;border-color:#333;color:#bbb;border-radius:999px}
+.catalog .filter.active,.catalog .filter:hover{background:#fff;border-color:#fff;color:#000}
+.catalog .card{background:#101010;border-color:#292929;border-radius:12px;overflow:hidden}
+.catalog .photo{background:#fff}
+.catalog .body h3{color:#fff}
+.catalog .tag,.catalog .enquire{color:#bbb}
+.catalog .cardfoot{border-color:#292929}
+.catalog .cardfoot span{color:#888}
+.catalog .empty{background:#111;color:#aaa;border:1px solid #292929;border-radius:12px}
+#order-service{background:#050505;color:#f5f5f5}
+#order-service .eyebrow,#order-service .intro p{color:#999}
+.order-panel{background:#101010;color:#f5f5f5;border-color:#292929;box-shadow:inset 0 1px 1px rgba(255,255,255,.07);border-radius:16px}
+.order-panel input,.order-panel textarea{background:#080808;color:#fff;border-color:#333;border-radius:9px}
+.order-panel input:focus,.order-panel textarea:focus{outline:2px solid rgba(255,255,255,.22);border-color:#888}
+.order-panel .btn,.order-panel .btn.gold{background:#fff;color:#000;border-color:#fff;border-radius:999px}
+.order-result{background:#191919;color:#ddd}
+.order-result strong{color:#fff}
+@media(max-width:760px){
+ #about{padding:44px 0 50px}
+ #about .about{grid-template-columns:1fr;gap:26px}
+ #about .about-masthead{width:min(100%,360px);max-height:170px}
+ #about h2{font-size:clamp(34px,9vw,46px)}
+ #contact{padding:40px 0}
+}
+@media(prefers-reduced-motion:no-preference){
+ #about .about-masthead{transition:transform .45s ease,box-shadow .45s ease}
+ #about .about-masthead:hover{transform:translateY(-3px);box-shadow:inset 0 1px 1px rgba(255,255,255,.16),0 24px 54px rgba(0,0,0,.48)}
+}
+@media(prefers-reduced-motion:reduce){
+ #about .about-masthead{transition:none}
+}
+</style>
+
 </head><body>
 <a class="skip-link" href="#catalogue">Skip to product catalogue</a>
 <header class="nav"><div class="wrap"><a class="brand" href="#" aria-label="Tenacity Locks home"><img class="logo" src="/images/Tenacity%20Locks%20LTD%20Logo.png" alt="Tenacity Locks Ltd"></a><nav class="links" id="links" aria-label="Main navigation"><a href="#catalogue">Product catalogue</a><a href="#about">About Tenacity</a><a href="#contact">Contact</a></nav><a class="btn nav-cta" href="https://wa.me/254729863950?text=Hello%20Tenacity%20Locks%2C%20I%20need%20help%20choosing%20a%20product." target="_blank" rel="noopener">Talk to a lock expert ↗</a><button class="hamb" id="hamb" aria-label="Toggle navigation" aria-expanded="false" aria-controls="links"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
