@@ -1,12 +1,12 @@
 const base=process.env.UPSTASH_REDIS_REST_URL,token=process.env.UPSTASH_REDIS_REST_TOKEN;
 
-export function ready(){return !!(base&&token)}
+function ready(){return !!(base&&token)}
 
 function safeMessage(value){
   return String(value||"").replace(/[\\r\\n\\t]+/g," ").slice(0,240);
 }
 
-export async function redis(command){
+async function redis(command){
   if(!ready()) throw new Error("Order database is not configured. Add UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN.");
   let endpoint;
   try{
@@ -49,8 +49,8 @@ export async function redis(command){
   return data.result;
 }
 
-export const key=(id)=>"tenacity:order:"+id;
-export async function getOrder(id){
+const key=(id)=>"tenacity:order:"+id;
+async function getOrder(id){
   const raw=await redis(["GET",key(id)]);
   if(!raw)return null;
   try{return JSON.parse(raw)}catch{
@@ -58,21 +58,23 @@ export async function getOrder(id){
     return null;
   }
 }
-export async function saveOrder(order){
+async function saveOrder(order){
   await redis(["SET",key(order.orderNumber),JSON.stringify(order),"EX",60*60*24*180]);
   return order;
 }
-export function orderNumber(){
+function orderNumber(){
   return "TL-"+new Date().toISOString().slice(2,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,7).toUpperCase();
 }
-export function json(res,status,data){
+function json(res,status,data){
   res.setHeader("Cache-Control","no-store");
   res.setHeader("Content-Type","application/json; charset=utf-8");
   return res.status(status).json(data);
 }
-export function readBody(req){
+function readBody(req){
   if(typeof req.body==="string"){
     try{return JSON.parse(req.body||"{}")}catch{return {}}
   }
   return req.body||{};
 }
+
+module.exports={ready,redis,key,getOrder,saveOrder,orderNumber,json,readBody};
