@@ -71,6 +71,79 @@
 @media(min-width:721px) and (max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.links a:after{transition:none}.logo{transition:none}}
 
+
+/* Unified header + warm editorial direction inspired by the supplied reference */
+:root{
+ --ink:#351b19;--deep:#2f1716;--paper:#f7f1ed;--white:#fffaf7;
+ --gold:#ff6842;--gold2:#ff8a68;--muted:#786a66;--line:#e7d8d1;
+ --green:#244d42;--max:1320px;
+}
+.nav{height:104px;background:rgba(247,241,237,.98);border-bottom:1px solid #e7d8d1;box-shadow:0 8px 26px rgba(53,27,25,.06)}
+.nav .wrap{
+ position:relative;width:min(var(--max),calc(100% - 64px));max-width:var(--max);
+ height:100%;margin:0 auto;padding:0;display:flex;align-items:center;
+ justify-content:space-between;gap:clamp(18px,3vw,44px)
+}
+.nav .brand{
+ position:relative;left:auto;bottom:auto;transform:none;flex:0 1 300px;
+ width:min(300px,28%);height:82px;display:flex;align-items:center;justify-content:flex-start
+}
+.logo{display:block;width:100%;height:78px;max-width:100%;object-fit:contain;object-position:left center}
+.links{
+ position:static;display:flex;align-items:center;justify-content:center;flex:1;
+ gap:clamp(16px,2.3vw,34px);margin:0;font-size:13px;font-weight:700;white-space:nowrap
+}
+.links a{padding:12px 0;color:#492724}
+.links a:hover{color:#e95635}
+.nav .nav-cta{position:static;flex:0 0 auto;white-space:nowrap;padding:13px 20px;background:#914638;color:#fff8f4;font-size:12px}
+.nav .nav-cta:hover{background:#71352d}
+.hamb{color:var(--ink)}
+.hero{background:#351b19;color:#fff7f2}
+.hero:before{background:radial-gradient(ellipse at 50% 30%,rgba(255,104,66,.18),transparent 43%),linear-gradient(135deg,#351b19 0%,#49231f 58%,#2e1716 100%)}
+.hero .wrap{min-height:0;grid-template-columns:1fr;justify-items:center;gap:38px;padding:86px 0 78px;text-align:center}
+.hero .wrap>div:first-child{max-width:850px}
+.eyebrow,.hero .eyebrow{color:#ff9a7e}
+h1,h2,h3{font-family:'Manrope',sans-serif;letter-spacing:-.045em}
+h1{font-size:clamp(50px,7vw,88px);line-height:1.02;max-width:850px;margin:18px auto 24px}
+h1 em{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-style:normal;color:#ff704c;letter-spacing:-.055em}
+.hero p{max-width:650px;margin:0 auto;color:#ead4cc;font-size:15px;line-height:1.85}
+.hero-cta{justify-content:center;margin-top:30px}
+.btn.gold{background:#ff6842;color:#fffaf7}
+.btn.gold:hover{background:#ff8a68}
+.hero-visual{width:min(920px,100%);height:clamp(300px,43vw,500px);margin:0 auto;border:1px solid rgba(255,255,255,.16);border-radius:18px 90px 8px 8px;box-shadow:0 30px 80px rgba(0,0,0,.28);background:#351b19}
+.hero-visual img{object-fit:contain;opacity:1;border-radius:inherit;filter:none}
+.hero-visual:after{display:none}
+.catalog{background:#f0e8e2}
+.intro h2,.about h2,.contact h2{letter-spacing:-.045em}
+.tag{color:#b94d35}
+.enquire{color:#b94d35;background:#fff0e9}
+.filter.active,.filter:hover{background:#49231f;border-color:#49231f}
+.searchbox input:focus{border-color:#ff6842;box-shadow:0 0 0 3px #ff68422c}
+.contact{background:linear-gradient(115deg,#ff8a68,#f56b4b)}
+.contact .btn{background:#351b19;color:#fff}
+.footer{background:#2b1514}
+.mobile a{background:#ff6842;color:#fff}
+.mobile a:last-child{background:#fff7f2;color:#351b19}
+@media(max-width:1000px) and (min-width:721px){
+ .nav{height:96px}.nav .wrap{width:calc(100% - 40px);gap:16px}
+ .nav .brand{flex-basis:230px;width:230px;height:72px}.logo{height:68px}
+ .links{gap:16px;font-size:12px}.nav .nav-cta{padding:11px 14px}
+ .hero .wrap{padding:72px 0 66px}
+}
+@media(max-width:720px){
+ .nav{height:82px}
+ .nav .wrap{width:calc(100% - 34px);padding:0;justify-content:center}
+ .nav .brand{position:absolute;left:50%;top:6px;bottom:auto;transform:translateX(-50%);width:min(250px,calc(100vw - 100px));height:68px;flex:none}
+ .logo{height:64px;object-position:center}
+ .links{position:absolute;top:82px;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;padding:12px 20px 18px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 14px 24px rgba(53,27,25,.12);white-space:normal}
+ .links.open{display:flex}.links a{padding:14px 2px;border-bottom:1px solid var(--line)}
+ .nav .nav-cta{display:none}.hamb{display:flex;position:absolute;right:0;top:20px;align-items:center;justify-content:center;background:#fffaf7}
+ .hero .wrap{padding:58px 0 52px;gap:30px}
+ .hero h1{font-size:clamp(43px,11vw,60px)}
+ .hero p{font-size:14px}
+ .hero-visual{height:clamp(230px,68vw,340px);border-radius:12px 48px 6px 6px}
+}
+
 </style></head><body>
 <a class="skip-link" href="#catalogue">Skip to product catalogue</a>
 <header class="nav"><div class="wrap"><a class="brand" href="#" aria-label="Tenacity Locks home"><img class="logo" src="/images/Tenacity%20Locks%20LTD%20Logo.png" alt="Tenacity Locks Ltd"></a><nav class="links" id="links" aria-label="Main navigation"><a href="#catalogue">Product catalogue</a><a href="#about">About Tenacity</a><a href="#contact">Contact</a></nav><a class="btn nav-cta" href="https://wa.me/254729863950?text=Hello%20Tenacity%20Locks%2C%20I%20need%20help%20choosing%20a%20product." target="_blank" rel="noopener">Talk to a lock expert ↗</a><button class="hamb" id="hamb" aria-label="Toggle navigation" aria-expanded="false" aria-controls="links"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
