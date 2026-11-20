@@ -233,10 +233,53 @@ h1 em{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-style:nor
  .nav .hamb{display:flex;position:static;flex:0 0 42px;align-items:center;justify-content:center}
 }
 
+
+/* Header and hero refinement */
+.nav{height:100px}
+.nav .wrap{position:relative;width:100%;max-width:none;height:100%;margin:0;padding:0 18px 0 8px;display:grid;grid-template-columns:minmax(250px,340px) minmax(0,1fr) auto;align-items:center;gap:clamp(16px,2.2vw,32px)}
+.nav .brand{position:static;left:auto;top:auto;bottom:auto;transform:none;display:flex;align-items:center;justify-content:flex-start;width:100%;max-width:340px;height:94px;margin:0}
+.nav .brand .logo{display:block;width:100%;height:90px;max-width:100%;object-fit:contain;object-position:left center}
+.nav .links{position:static;inset:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(15px,2vw,28px);margin:0;white-space:nowrap}
+.nav .nav-cta{position:static;inset:auto;justify-self:end;white-space:nowrap}
+.nav .hamb{display:none}
+.hero-showcase{display:grid!important;grid-template-columns:minmax(125px,.62fr) minmax(0,1.55fr) minmax(125px,.62fr)!important;align-items:center;gap:clamp(18px,3vw,42px)!important;padding:48px 0 40px!important}
+.hero-copy{text-align:center;min-width:0}
+.hero-copy .eyebrow{margin-bottom:12px}
+.hero-copy h1{font-size:clamp(38px,4.4vw,64px);margin:8px 0 16px}
+.hero-copy p{max-width:620px;margin:0 auto;color:#c4cece;line-height:1.7;font-size:14px}
+.hero-copy .hero-cta{justify-content:center}
+.hero-side{height:260px;display:flex;align-items:center;justify-content:center;min-width:0;padding:12px;background:linear-gradient(145deg,#ffffff12,#ffffff04);border:1px solid #ffffff20;border-radius:8px 34px 8px 8px}
+.hero-side img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 18px 22px #0005)}
+.hero-side-right{border-radius:34px 8px 8px 8px}
+.hero-promo-strip{width:min(920px,calc(100% - 48px));height:180px;margin:0 auto 34px;overflow:hidden;border-radius:12px;background:#101a22;display:flex;align-items:center;justify-content:center}
+.hero-promo-strip img{width:100%;height:100%;object-fit:contain;object-position:center}
+@media(max-width:1000px) and (min-width:721px){
+ .nav .wrap{padding:0 14px 0 8px;grid-template-columns:minmax(210px,260px) minmax(0,1fr) auto;gap:12px}
+ .nav .brand{height:84px}.nav .brand .logo{height:80px}
+ .nav .links{gap:12px;font-size:11px}.nav .nav-cta{padding:10px 12px;font-size:10px}
+ .hero-showcase{grid-template-columns:minmax(100px,.5fr) minmax(0,1.7fr) minmax(100px,.5fr)!important;gap:14px!important}
+ .hero-side{height:210px}.hero-promo-strip{height:150px}
+}
+@media(max-width:720px){
+ .nav{height:76px}
+ .nav .wrap{width:100%;padding:0 12px 0 5px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+ .nav .brand{position:static;transform:none;flex:0 1 230px;width:min(230px,calc(100% - 54px));max-width:230px;height:70px;margin:0}
+ .nav .brand .logo{height:66px;object-position:left center}
+ .nav .links{position:absolute;top:76px;left:0;right:0;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:12px 20px 18px;background:var(--paper);border-bottom:1px solid var(--line);white-space:normal}
+ .nav .links.open{display:flex}.nav .links a{padding:14px 2px;border-bottom:1px solid var(--line)}
+ .nav .nav-cta{display:none}.nav .hamb{display:flex;position:static;flex:0 0 42px;align-items:center;justify-content:center}
+ .hero-showcase{grid-template-columns:1fr 1fr!important;gap:12px!important;padding:34px 0 22px!important}
+ .hero-copy{grid-column:1/-1;grid-row:1}
+ .hero-copy h1{font-size:clamp(38px,9vw,50px)}
+ .hero-copy p{font-size:13px}
+ .hero-side{height:145px;padding:8px}
+ .hero-promo-strip{width:calc(100% - 34px);height:130px;margin-bottom:24px}
+}
+
 </style></head><body>
 <a class="skip-link" href="#catalogue">Skip to product catalogue</a>
 <header class="nav"><div class="wrap"><a class="brand" href="#" aria-label="Tenacity Locks home"><img class="logo" src="/images/Tenacity%20Locks%20LTD%20Logo.png" alt="Tenacity Locks Ltd"></a><nav class="links" id="links" aria-label="Main navigation"><a href="#catalogue">Product catalogue</a><a href="#about">About Tenacity</a><a href="#contact">Contact</a></nav><a class="btn nav-cta" href="https://wa.me/254729863950?text=Hello%20Tenacity%20Locks%2C%20I%20need%20help%20choosing%20a%20product." target="_blank" rel="noopener">Talk to a lock expert ↗</a><button class="hamb" id="hamb" aria-label="Toggle navigation" aria-expanded="false" aria-controls="links"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
-<section class="hero"><div class="wrap"><div><div class="eyebrow">TENACITY LOCKS LTD · PRODUCT COLLECTION</div><h1>Find the right<br><em>security solution.</em></h1><p>Explore the wider Tenacity Locks range—from padlocks and main-door security to internal locks, door hardware, viewers and bathroom accessories. Search the catalogue and enquire directly about any model.</p><div class="hero-cta"><a class="btn gold" href="#catalogue">Browse all products ↓</a><a class="btn" style="background:transparent;border:1px solid #ffffff55" href="https://wa.me/254729863950" target="_blank" rel="noopener">Speak to our team ↗</a></div></div><div class="hero-visual hero-promo"><img src="/images/tenacity-big-project-promo.webp" alt="Tenacity Locks Ltd — Having a big project? Door lock range and Mega Offer promotion"></div></div></section>
+<section class="hero"><div class="wrap hero-showcase"><div class="hero-side hero-side-left"><img src="https://www.tenacitylocks.com/images/stories/virtuemart/product/resized/yale-61mm-weatherproof-padlocks_178x200.jpg" alt="Yale weatherproof security padlock" loading="eager"></div><div class="hero-copy"><div class="eyebrow">TENACITY LOCKS LTD · PRODUCT COLLECTION</div><h1>Find the right<br><em>security solution.</em></h1><p>Explore the wider Tenacity Locks range—from padlocks and main-door security to internal locks, door hardware, viewers and bathroom accessories. Search the catalogue and enquire directly about any model.</p><div class="hero-cta"><a class="btn gold" href="#catalogue">Browse all products ↓</a><a class="btn" style="background:transparent;border:1px solid #ffffff55" href="https://wa.me/254729863950" target="_blank" rel="noopener">Speak to our team ↗</a></div></div><div class="hero-side hero-side-right"><img src="https://www.tenacitylocks.com/images/stories/virtuemart/product/resized/tenacity-4-pin-510-mac_178x200.png" alt="Tenacity 4-PIN 510 MAC door lock" loading="eager"></div></div><div class="hero-promo-strip"><img src="/images/tenacity-big-project-promo.webp" alt="Tenacity Locks Ltd — Having a big project? Door lock range and Mega Offer promotion" loading="lazy"></div></section>
 <section class="section catalog" id="catalogue"><div class="wrap"><div class="intro"><div><div class="eyebrow">THE PRODUCT RANGE</div><h2>Explore the complete catalogue.</h2></div><p>Products and images below are taken from the public Tenacity Locks catalogue. Availability and current pricing should be confirmed with the sales team.</p></div><div class="tools"><div class="searchbox"><span class="searchicon" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.2 4.2"/></svg></span><input id="search" type="search" placeholder="Search by product, model or category…" aria-label="Search product catalogue"></div><div class="filters" id="filters"><button class="filter active" data-cat="All">All products</button><button class="filter" data-cat="Padlocks">Padlocks</button><button class="filter" data-cat="Main door locks">Main door</button><button class="filter" data-cat="Internal door locks">Internal locks</button><button class="filter" data-cat="Rose handle locks">Rose handles</button><button class="filter" data-cat="Door handles">Door handles</button><button class="filter" data-cat="Door closers">Closers</button><button class="filter" data-cat="Door viewers">Viewers</button><button class="filter" data-cat="Bathroom accessories">Bathroom</button><button class="filter" data-cat="Door security chains">Security chains</button><button class="filter" data-cat="Door hinges">Hinges</button><button class="filter" data-cat="Door pullers">Pullers</button><button class="filter" data-cat="Door stoppers">Stoppers</button><button class="filter" data-cat="Panic bolts">Panic bolts</button><button class="filter" data-cat="Door signage">Signage</button><button class="filter" data-cat="Cabinet accessories">Cabinet</button><button class="filter" data-cat="Soap dishes">Soap dishes</button></div></div><div class="countline"><span id="count" aria-live="polite" aria-atomic="true">Loading catalogue…</span><span>Prices confirmed on enquiry</span></div><div class="grid" id="grid"></div></div></section>
 <section class="section" id="about"><div class="wrap about"><img class="about-masthead" src="/images/Tenacity%20Locks%20LTD%20Logo.png" alt="Tenacity Locks Ltd showroom signage and Kijabe Street location" loading="lazy"><div><div class="eyebrow">ABOUT TENACITY LOCKS</div><h2>Security you can count on.</h2><p>Tenacity Locks Ltd began its journey in 2011 as S.K. Hardware and was formally incorporated in 2012. Today, the company serves customers from Kijabe Street, Nairobi, with a broad selection of locks and security hardware.</p><p>For product guidance, quotations, current stock and delivery arrangements, contact the team directly.</p><a class="btn" href="https://wa.me/254729863950?text=Hello%20Tenacity%20Locks%2C%20please%20assist%20with%20a%20quotation." target="_blank" rel="noopener">Request a quotation ↗</a></div></div></section>
 <section class="contact" id="contact"><div class="wrap"><div><div class="eyebrow" style="color:#5b4423">NEED HELP CHOOSING?</div><h2>Let's find the right fit.</h2><p>Share the product model, quantity or security requirement. The Tenacity team can confirm price, availability and next steps.</p></div><a class="btn" href="https://wa.me/254729863950?text=Hello%20Tenacity%20Locks%2C%20I%20need%20a%20product%20quotation." target="_blank" rel="noopener">Enquire on WhatsApp ↗</a></div></section>
