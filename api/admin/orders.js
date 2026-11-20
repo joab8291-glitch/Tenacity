@@ -3,8 +3,11 @@ import {redis,getOrder,saveOrder,json,readBody,bodyWithinLimit,rateLimit} from "
 function authorized(req){const expected=process.env.TENACITY_ORDER_ADMIN_TOKEN,raw=req.headers?.authorization,supplied=String(Array.isArray(raw)?raw[0]||"":raw||"").replace(/^Bearer\s+/i,"").trim();if(typeof expected!=="string"||Buffer.byteLength(expected)<32||!supplied)return false;const a=Buffer.from(expected),b=Buffer.from(supplied);return a.length===b.length&&crypto.timingSafeEqual(a,b)}
 export default async function handler(req,res){
  if(!["GET","PATCH","DELETE"].includes(req.method))return json(res,405,{error:"Method not allowed"});
- if(!authorized(req))return json(res,401,{error:"Unauthorized"});
  try{
+  // Count every attempt before checking credentials so invalid tokens cannot be brute-forced
+  // without consuming the same shared, IP-scoped Redis limit as authenticated requests.
+  if(!await rateLimit(req,"admin-auth",20,900))return json(res,429,{error:"Too many access attempts. Wait 15 minutes before trying again."});
+  if(!authorized(req))return json(res,401,{error:"Unauthorized"});
   if(!await rateLimit(req,"admin",180,300))return json(res,429,{error:"Too many admin requests. Wait and retry."});
   if(req.method!=="GET"&&!bodyWithinLimit(req,12000))return json(res,413,{error:"Request is too large."});
   if(req.method==="GET"){const ids=await redis(["LRANGE","tenacity:orders","0","99"]),orders=await Promise.all((ids||[]).map(getOrder));return json(res,200,{orders:orders.filter(Boolean)})}
