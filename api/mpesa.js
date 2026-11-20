@@ -10,7 +10,7 @@ export default async function handler(req,res){
   if(!await rateLimit(req,"mpesa-ip",8,900))return json(res,429,{error:"Too many payment attempts. Please wait before trying again."});
   const b=readBody(req);if(b.action!=="initiate")return json(res,400,{error:"Only approved-order payments are supported."});
   const id=String(b.orderNumber||"").trim().toUpperCase();if(!/^TL-[0-9]{6}-[A-Z0-9]{5}$/.test(id))return json(res,400,{error:"Enter a valid order number."});
-  if(!await rateLimit(req,"mpesa-order",2,600,id))return json(res,429,{error:"A payment prompt was recently requested for this order. Please wait before retrying."});
+  if(!await rateLimit(req,"mpesa-order",1,60,id))return json(res,429,{error:"A payment prompt was recently requested for this order. Please wait before retrying."});
   const o=await getOrder(id);if(!o||o.type!=="quotation"||o.status!=="approved"||!Number.isSafeInteger(Number(o.amount))||Number(o.amount)<1)return json(res,409,{error:"This order is not approved for payment yet."});
   if(o.payment?.status==="confirmed"||o.status==="paid")return json(res,409,{error:"This order has already been paid."});
   if(o.payment?.status==="initiated"&&Date.now()-Date.parse(o.payment.initiatedAt||0)<60000)return json(res,409,{error:"A payment prompt is already in progress. Check the customer's phone."});
