@@ -13,7 +13,7 @@ async function redis(command){
 const key=id=>"tenacity:order:"+id;
 async function getOrder(id){const raw=await redis(["GET",key(id)]);if(!raw)return null;try{return JSON.parse(raw)}catch{console.error("Invalid stored order:",safeMessage(id));return null}}
 async function saveOrder(o){await redis(["SET",key(o.orderNumber),JSON.stringify(o),"EX",15552000]);return o}
-function orderNumber(){return "TL-"+new Date().toISOString().slice(2,10).replace(/-/g,"")+"-"+crypto.randomBytes(4).toString("hex").slice(0,5).toUpperCase()}
+function orderNumber(){return "TL-"+new Date().toISOString().slice(2,10).replace(/-/g,"")+"-"+crypto.randomInt(36**5).toString(36).toUpperCase().padStart(5,"0")}
 function json(res,status,data){res.setHeader("Cache-Control","no-store, no-cache, must-revalidate, private");res.setHeader("Pragma","no-cache");res.setHeader("X-Content-Type-Options","nosniff");res.setHeader("Content-Type","application/json; charset=utf-8");return res.status(status).json(data)}
 function readBody(req){if(typeof req.body==="string"){try{return JSON.parse(req.body||"{}")}catch{return {}}}return req.body&&typeof req.body==="object"?req.body:{}}
 function bodyWithinLimit(req,max=32768){const n=Number(req.headers?.["content-length"]||0);if(n>max)return false;try{return Buffer.byteLength(typeof req.body==="string"?req.body:JSON.stringify(req.body||{}),"utf8")<=max}catch{return false}}
