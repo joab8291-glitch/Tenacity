@@ -23,6 +23,14 @@ export default async function handler(req,res){
       const orders=await Promise.all((ids||[]).map(getOrder));
       return json(res,200,{orders:orders.filter(Boolean)});
     }
+    if(req.method==="DELETE"){
+      const b=readBody(req),id=String(b.orderNumber||"").toUpperCase(),o=await getOrder(id);
+      if(!id)return json(res,400,{error:"Order number is required"});
+      if(!o)return json(res,404,{error:"Order not found"});
+      await redis(["DEL","tenacity:order:"+id]);
+      await redis(["LREM","tenacity:orders","0",id]);
+      return json(res,200,{success:true,deleted:id});
+    }
     if(req.method==="PATCH"){
       const b=readBody(req),id=String(b.orderNumber||"").toUpperCase(),o=await getOrder(id);
       if(!o)return json(res,404,{error:"Order not found"});
