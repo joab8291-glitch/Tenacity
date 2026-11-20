@@ -472,3 +472,91 @@ window.addEventListener('keydown',e=>{if(!stage.matches(':hover')&&document.acti
 stage.querySelectorAll('.ky-hotspot').forEach(b=>{const tip=stage.querySelector('.ky-tip');const reveal=()=>{tip.textContent=b.dataset.tip;tip.classList.add('is-open')};b.addEventListener('mouseenter',reveal);b.addEventListener('click',reveal);b.addEventListener('focus',reveal)});
 })();
 </script></body></html>
+
+<!-- TENACITY ABOUT / CONTACT / FOOTER / ORDER AREA DESIGN -->
+<style id="tenacity-lower-sections-redesign">
+/* Scope: About, contact CTA, footer and quotation/checkout only. Header, hero and catalogue are untouched. */
+#about.section{position:relative;isolation:isolate;overflow:hidden;padding:clamp(64px,8vw,112px) 0;background:#f3f5ed}
+#about.section:before{content:"";position:absolute;z-index:-1;width:460px;height:460px;border:1px solid rgba(36,77,55,.10);border-radius:50%;right:-190px;top:-190px;box-shadow:0 0 0 38px rgba(36,77,55,.025),0 0 0 78px rgba(36,77,55,.02)}
+#about .wrap.about{display:grid;grid-template-columns:minmax(280px,.92fr) minmax(0,1.08fr);align-items:center;gap:clamp(34px,6vw,88px);max-width:1160px}
+#about .about-masthead{display:block;width:100%;height:clamp(260px,32vw,410px);max-height:none;object-fit:contain;object-position:center;background:#fff;border:1px solid rgba(30,65,45,.12);border-radius:5px 46px 5px 5px;padding:clamp(16px,2.5vw,30px);box-shadow:18px 18px 0 #dce7cf,0 24px 60px rgba(25,52,36,.10)}
+#about .wrap.about>div{max-width:620px}
+#about .eyebrow{display:flex;align-items:center;gap:12px;color:#567344;font-size:11px;font-weight:850;letter-spacing:.2em}
+#about .eyebrow:before{content:"";width:28px;height:2px;background:#a6cf57}
+#about h2{max-width:620px;margin:16px 0 20px;color:#173d2d;font-size:clamp(38px,5vw,64px);line-height:1.02;letter-spacing:-.045em}
+#about p{max-width:590px;color:#536158;font-size:15px;line-height:1.85;margin:0 0 14px}
+#about .btn{display:inline-flex;align-items:center;justify-content:center;gap:18px;margin-top:16px;min-height:52px;padding:0 24px;border-radius:3px;background:#244d37;color:#fff;font-size:12px;font-weight:800;letter-spacing:.02em;box-shadow:0 10px 24px rgba(25,60,40,.14);transition:transform .2s ease,background .2s ease}
+#about .btn:hover{background:#173b2a;transform:translateY(-2px)}
+#contact.contact{position:relative;isolation:isolate;overflow:hidden;padding:clamp(42px,6vw,76px) 0;background:#183e2d;color:#fff}
+#contact.contact:after{content:"T";position:absolute;z-index:-1;right:8%;top:50%;transform:translateY(-58%);font-size:clamp(180px,30vw,360px);font-weight:900;line-height:1;color:rgba(255,255,255,.035);pointer-events:none}
+#contact .wrap{display:flex;align-items:center;justify-content:space-between;gap:36px;max-width:1160px}
+#contact .wrap>div{max-width:680px}
+#contact .eyebrow{color:#b8dc75!important;font-size:10px;letter-spacing:.2em}
+#contact .eyebrow:before{content:"";display:inline-block;width:25px;height:2px;background:#b8dc75;margin-right:10px;vertical-align:middle}
+#contact h2{margin:12px 0 12px;color:#fff;font-size:clamp(34px,4.3vw,54px);line-height:1.04;letter-spacing:-.04em}
+#contact p{max-width:620px;margin:0;color:rgba(255,255,255,.72);font-size:14px;line-height:1.8}
+#contact .btn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 25px;border-radius:3px;background:#c5e77c;color:#183e2d;font-size:12px;font-weight:900;box-shadow:0 12px 30px rgba(0,0,0,.16);transition:transform .2s ease,background .2s ease}
+#contact .btn:hover{background:#d5f394;transform:translateY(-2px)}
+.footer.footer{padding:58px 0 24px;background:#102d21;color:#fff;border-top:1px solid rgba(196,231,124,.18)}
+.footer .wrap{max-width:1160px}
+.footer .footgrid{display:grid;grid-template-columns:1.25fr .9fr .85fr;gap:clamp(28px,5vw,70px);padding-bottom:38px}
+.footer .footgrid>div:first-child img{display:block;width:min(230px,100%);height:82px;object-fit:contain;object-position:left center;padding:10px 14px;background:#fff;border-radius:3px}
+.footer .footgrid p{margin:18px 0 0;max-width:320px;color:rgba(255,255,255,.66);font-size:13px;line-height:1.8}
+.footer .footgrid h4{margin:7px 0 18px;color:#c5e77c;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.footer .footgrid span,.footer .footgrid a{color:rgba(255,255,255,.76);font-size:13px;line-height:1.9}
+.footer .footgrid a{transition:color .2s ease}
+.footer .footgrid a:hover{color:#c5e77c}
+.footer .footlinks{display:grid;gap:8px}
+.footer .copy{padding-top:20px;border-top:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.48);font-size:11px;line-height:1.7}
+#order-service.section{padding:clamp(62px,8vw,104px) 0;background:#f4f6ef}
+#order-service .wrap{max-width:1160px}
+#order-service .intro{display:grid;grid-template-columns:1fr minmax(260px,.72fr);align-items:end;gap:42px;margin-bottom:34px}
+#order-service .intro .eyebrow{color:#66834b;font-size:10px;font-weight:850;letter-spacing:.2em}
+#order-service .intro h2{max-width:700px;margin:13px 0 0;color:#173d2d;font-size:clamp(34px,4.7vw,58px);line-height:1.03;letter-spacing:-.045em}
+#order-service .intro>p{margin:0 0 5px;color:#5c685d;font-size:14px;line-height:1.85}
+#order-service .order-panels{display:grid;grid-template-columns:1.08fr .92fr;gap:20px;align-items:stretch}
+#order-service .order-panel{min-width:0;padding:clamp(22px,3.2vw,38px);border:1px solid #dce5d3;border-radius:5px;background:#fff;box-shadow:0 18px 50px rgba(25,55,35,.06)}
+#order-service .order-panel h3{margin:0 0 24px;color:#193e2d;font-size:23px;letter-spacing:-.025em}
+#order-service .order-panel label{display:grid;gap:8px;margin:15px 0;color:#344b3c;font-size:11px;font-weight:850;letter-spacing:.035em}
+#order-service .order-panel input,#order-service .order-panel textarea{width:100%;min-height:48px;padding:13px 14px;border:1px solid #d8e1d1;border-radius:3px;background:#f8faf5;color:#183e2d;font:inherit;font-size:13px;transition:border-color .2s ease,box-shadow .2s ease}
+#order-service .order-panel textarea{min-height:100px;resize:vertical;line-height:1.6}
+#order-service .order-panel input::placeholder,#order-service .order-panel textarea::placeholder{color:#9aa69a}
+#order-service .order-panel input:focus,#order-service .order-panel textarea:focus{outline:none;border-color:#83a94d;box-shadow:0 0 0 3px rgba(131,169,77,.16)}
+#order-service .order-panel button.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 21px;border:0;border-radius:3px;background:#244d37;color:#fff;font-size:11px;font-weight:900;letter-spacing:.025em;cursor:pointer;transition:transform .2s ease,background .2s ease}
+#order-service .order-panel button.btn:hover{background:#173b2a;transform:translateY(-1px)}
+#order-service .order-panel button.btn.gold{background:#c5e77c;color:#183e2d}
+#order-service .order-panel button.btn.gold:hover{background:#d5f394}
+#order-service #quoteMessage,#order-service #payMessage{min-height:18px;margin:12px 0 0;color:#315d3d;font-size:12px;line-height:1.6}
+#order-service #orderResult:empty{display:none}
+#order-service .order-result{margin-top:18px;padding:16px;border:1px solid #dce5d3;border-radius:3px;background:#f3f7ed;color:#344b3c;font-size:13px;line-height:1.8;overflow-wrap:anywhere}
+#order-service #paymentFields{margin-top:20px;padding-top:18px;border-top:1px solid #e1e8da}
+#order-service #paymentFields[hidden]{display:none}
+@media(max-width:760px){
+ #about.section{padding:54px 0 62px}
+ #about .wrap.about{grid-template-columns:1fr;gap:34px}
+ #about .about-masthead{width:100%;height:clamp(220px,65vw,330px);max-width:520px;justify-self:center;border-radius:4px 34px 4px 4px;box-shadow:10px 10px 0 #dce7cf,0 18px 42px rgba(25,52,36,.09)}
+ #about .wrap.about>div{max-width:none}
+ #about h2{font-size:clamp(38px,10vw,54px)}
+ #about p{font-size:14px}
+ #contact.contact{padding:42px 0}
+ #contact .wrap{align-items:flex-start;flex-direction:column;gap:22px}
+ #contact .btn{width:100%;max-width:360px}
+ .footer.footer{padding:42px 0 20px}
+ .footer .footgrid{grid-template-columns:1fr 1fr;gap:30px 22px;padding-bottom:28px}
+ .footer .footgrid>div:first-child{grid-column:1/-1}
+ #order-service.section{padding:54px 0}
+ #order-service .intro{grid-template-columns:1fr;gap:12px;margin-bottom:24px}
+ #order-service .intro h2{font-size:clamp(35px,9vw,48px)}
+ #order-service .order-panels{grid-template-columns:1fr;gap:14px}
+ #order-service .order-panel{padding:22px 18px}
+}
+@media(max-width:420px){
+ .footer .footgrid{grid-template-columns:1fr}
+ .footer .footgrid>div:first-child{grid-column:auto}
+ #order-service .order-panel button.btn{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ #about .btn,#contact .btn,#order-service .order-panel button.btn{transition:none}
+}
+</style>
+
