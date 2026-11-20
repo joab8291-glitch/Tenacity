@@ -415,7 +415,53 @@ h1 em{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-style:nor
  .ky-scene-outro .ky-btn{justify-content:center}
 }
 @media(prefers-reduced-motion:reduce){.ky-stage *{animation:none!important;transition:none!important}}
-</style></head><body>
+</style><style id="tenacity-editorial-sections">
+/* Editorial finish for the About, enquiry and footer sections */
+#about{position:relative;overflow:hidden;background:#0b1713;color:#f2f5ef;padding:clamp(76px,10vw,142px) 0}
+#about:before{content:"";position:absolute;width:48vw;height:48vw;max-width:650px;max-height:650px;right:-18vw;top:-22vw;border:1px solid rgba(194,239,93,.16);border-radius:50%;box-shadow:0 0 0 48px rgba(194,239,93,.025),0 0 0 96px rgba(194,239,93,.018);pointer-events:none}
+#about .about{position:relative;z-index:1;grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);gap:clamp(42px,8vw,120px)}
+#about .about-masthead{width:100%;height:clamp(330px,42vw,570px);max-height:none;object-fit:cover;object-position:center;background:#f7f7f2;border:0;padding:0;box-shadow:22px 22px 0 rgba(194,239,93,.10)}
+#about .about>div{max-width:560px}
+#about .eyebrow{color:#c2ef5d;font:10px 'DM Mono',monospace;letter-spacing:.2em}
+#about h2{font-size:clamp(42px,6vw,76px);line-height:.98;letter-spacing:-.055em;margin:22px 0 28px;max-width:560px}
+#about p{color:#aebbb3;font-size:14px;line-height:1.95;max-width:520px}
+#about .btn{display:inline-flex;align-items:center;min-height:52px;margin-top:16px;padding:0 24px;background:#c2ef5d;color:#101910;border:1px solid #c2ef5d;font-weight:700;transition:transform .25s,background .25s}
+#about .btn:hover{transform:translateY(-3px);background:#d4ff78}
+#contact{position:relative;overflow:hidden;background:#c2ef5d;color:#101910;padding:clamp(58px,8vw,108px) 0}
+#contact:after{content:"";position:absolute;width:440px;height:440px;border:1px solid rgba(16,25,16,.18);border-radius:50%;right:-170px;top:-245px;box-shadow:0 0 0 42px rgba(16,25,16,.035),0 0 0 84px rgba(16,25,16,.025);pointer-events:none}
+#contact .wrap{position:relative;z-index:1;align-items:flex-end}
+#contact .eyebrow{color:#24351b!important;font:10px 'DM Mono',monospace;letter-spacing:.2em;margin-bottom:20px}
+#contact h2{font-size:clamp(42px,6.4vw,82px);letter-spacing:-.06em;line-height:.92;max-width:720px}
+#contact p{color:#263522;font-size:14px;line-height:1.85;max-width:480px;margin-top:20px}
+#contact .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 24px;white-space:nowrap;background:#101b15;color:#eff8e8;border:1px solid #101b15;font-weight:700;transition:transform .25s,background .25s}
+#contact .btn:hover{transform:translateY(-3px);background:#263b2d}
+.footer{position:relative;overflow:hidden;background:#08110e;color:#eef3ed;padding:clamp(58px,7vw,90px) 0 24px;border-top:1px solid rgba(194,239,93,.24)}
+.footer .footgrid{grid-template-columns:1.3fr .9fr .9fr;gap:clamp(28px,5vw,72px);padding-bottom:52px}
+.footer .footgrid>div:first-child{max-width:360px}
+.footer .footgrid img{width:190px;max-height:82px;object-fit:contain;background:#fff;padding:9px;border-radius:2px}
+.footer .footgrid>div:first-child p{max-width:290px;color:#aab8ae;font-size:13px;line-height:1.8;margin-top:20px}
+.footer .footgrid h4{font:10px 'DM Mono',monospace;letter-spacing:.19em;color:#c2ef5d;margin:5px 0 20px}
+.footer .footgrid p,.footer .footgrid a,.footer .footgrid span{font-size:12px;line-height:2;color:#aab8ae}
+.footer .footgrid a{transition:color .2s}
+.footer .footgrid a:hover{color:#c2ef5d}
+.footer .footlinks{gap:10px}
+.footer .copy{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;color:#78877d;font-size:10px;line-height:1.7}
+@media(max-width:760px){
+ #about{padding:72px 0 82px}
+ #about .about{grid-template-columns:1fr;gap:42px}
+ #about .about-masthead{height:clamp(260px,76vw,420px);box-shadow:12px 12px 0 rgba(194,239,93,.10)}
+ #about h2{font-size:clamp(42px,12vw,62px);margin:17px 0 22px}
+ #contact{padding:66px 0}
+ #contact .wrap{align-items:flex-start;flex-direction:column;gap:26px}
+ #contact h2{font-size:clamp(43px,12vw,66px)}
+ #contact .btn{width:100%}
+ .footer .footgrid{grid-template-columns:1fr 1fr;gap:34px 22px}
+ .footer .footgrid>div:first-child{grid-column:1/-1}
+}
+@media(max-width:420px){.footer .footgrid{grid-template-columns:1fr}.footer .footgrid>div:first-child{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){#about .btn,#contact .btn,.footer .footgrid a{transition:none}}
+</style>
+</head><body>
 <a class="skip-link" href="#catalogue">Skip to product catalogue</a>
 <header class="nav"><div class="wrap"><a class="brand" href="#" aria-label="Tenacity Locks home"><img class="logo" src="/images/Tenacity%20Locks%20LTD%20Logo.png" alt="Tenacity Locks Ltd"></a><nav class="links" id="links" aria-label="Main navigation"><a href="#catalogue">Product catalogue</a><a href="#about">About Tenacity</a><a href="#contact">Contact</a></nav><a class="btn nav-cta" href="https://wa.me/254729863950?text=Hello%20Tenacity%20Locks%2C%20I%20need%20help%20choosing%20a%20product." target="_blank" rel="noopener">Talk to a lock expert ↗</a><button class="hamb" id="hamb" aria-label="Toggle navigation" aria-expanded="false" aria-controls="links"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
 <section class="hero ky-stage" id="tenacityExperience" aria-label="Tenacity Locks featured product experience">
