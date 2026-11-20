@@ -3,7 +3,7 @@ const base=process.env.UPSTASH_REDIS_REST_URL,token=process.env.UPSTASH_REDIS_RE
 function ready(){return !!(base&&token)}
 
 function safeMessage(value){
-  return String(value||"").replace(/[\\r\\n\\t]+/g," ").slice(0,240);
+  return String(value||"").replaceAll("\r"," ").replaceAll("\n"," ").replaceAll("\t"," ").slice(0,240);
 }
 
 async function redis(command){
@@ -18,7 +18,9 @@ async function redis(command){
 
   let response;
   try{
-    response=await fetch(endpoint.toString().replace(/\\/$/,""),{
+    const endpointUrl=endpoint.toString();
+    const requestUrl=endpointUrl.endsWith("/")?endpointUrl.slice(0,-1):endpointUrl;
+    response=await fetch(requestUrl,{
       method:"POST",
       headers:{Authorization:"Bearer "+token,"Content-Type":"application/json",Accept:"application/json"},
       body:JSON.stringify(command),
