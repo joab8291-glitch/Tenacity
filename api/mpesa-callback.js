@@ -1,7 +1,9 @@
+import crypto from "node:crypto";
 import {getOrder,saveOrder,json,readBody,redis,bodyWithinLimit} from "./_lib/store.js";
+function validCallbackSecret(req){const expected=process.env.MPESA_CALLBACK_SECRET,supplied=String(req.query?.callbackSecret||"");if(typeof expected!=="string"||Buffer.byteLength(expected)<32||!supplied)return false;const a=Buffer.from(expected),b=Buffer.from(supplied);return a.length===b.length&&crypto.timingSafeEqual(a,b)}
 function callbackPhone(v){const p=String(v||"");return /^254[17]\d{8}$/.test(p)?p:null}
 export default async function handler(req,res){
- if(req.method!=="POST")return json(res,405,{ResultCode:1,ResultDesc:"Method not allowed"});if(!bodyWithinLimit(req,16000))return json(res,413,{ResultCode:1,ResultDesc:"Payload too large"});
+ if(req.method!=="POST")return json(res,405,{ResultCode:1,ResultDesc:"Method not allowed"});if(!validCallbackSecret(req))return json(res,404,{ResultCode:1,ResultDesc:"Not found"});if(!bodyWithinLimit(req,16000))return json(res,413,{ResultCode:1,ResultDesc:"Payload too large"});
  const s=readBody(req)?.Body?.stkCallback;if(!s?.CheckoutRequestID||typeof s.CheckoutRequestID!=="string")return json(res,200,{ResultCode:0,ResultDesc:"Accepted"});
  try{
   const raw=await redis(["GET","tenacity:checkout:"+s.CheckoutRequestID]);if(!raw)return json(res,200,{ResultCode:0,ResultDesc:"Unmatched callback acknowledged"});
