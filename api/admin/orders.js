@@ -1,13 +1,18 @@
-import {timingSafeEqual} from "node:crypto";
 import {redis,getOrder,saveOrder,json,readBody} from "../_lib/store.js";
+
+function constantTimeEqual(a,b){
+  if(a.length!==b.length)return false;
+  let mismatch=0;
+  for(let i=0;i<a.length;i++)mismatch|=a[i]^b[i];
+  return mismatch===0;
+}
 
 function authorized(req){
   const expected=process.env.TENACITY_ORDER_ADMIN_TOKEN;
-  const supplied=String(req.headers.authorization||"").replace(/^Bearer\\s+/i,"");
-  if(!expected||!supplied)return false;
-  const expectedBuffer=Buffer.from(expected);
-  const suppliedBuffer=Buffer.from(supplied);
-  return expectedBuffer.length===suppliedBuffer.length&&timingSafeEqual(expectedBuffer,suppliedBuffer);
+  const header=req.headers?.authorization;
+  const supplied=String(Array.isArray(header)?header[0]||"":header||"").replace(/^Bearer\s+/i,"").trim();
+  if(typeof expected!=="string"||!expected||!supplied)return false;
+  return constantTimeEqual(Buffer.from(expected,"utf8"),Buffer.from(supplied,"utf8"));
 }
 
 export default async function handler(req,res){
@@ -38,7 +43,7 @@ export default async function handler(req,res){
     }
     return json(res,405,{error:"Method not allowed"});
   }catch(e){
-    console.error("Admin orders:",e.message);
+    console.error("Admin orders:",e?.message||e);
     return json(res,503,{error:"Order management unavailable. Check the order database connection and try again."});
   }
 }
