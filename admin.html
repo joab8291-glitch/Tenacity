@@ -1,15 +1,145 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#101a22"><title>Tenacity | Order desk</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-<style>:root{--ink:#111c24;--deep:#0b141b;--paper:#f5f3ed;--gold:#c7a15f;--muted:#68747a;--line:#dedbd2}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px 'DM Sans',sans-serif}header{background:var(--deep);color:#fff;padding:22px max(22px,calc((100% - 1180px)/2));display:flex;justify-content:space-between;align-items:center;gap:20px}header strong{font:800 20px Manrope}.wrap{max-width:1180px;margin:36px auto;padding:0 20px}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:18px;box-shadow:0 10px 28px #111c2408}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.field{display:grid;gap:7px;flex:1;min-width:190px}label{font-weight:700;font-size:12px}input{width:100%;border:1px solid #d5d2c9;border-radius:7px;padding:12px;font:inherit}button{border:0;border-radius:7px;padding:12px 16px;background:var(--ink);color:#fff;font-weight:800;cursor:pointer}button.gold{background:var(--gold);color:#17212a}button.ghost{background:#ece9e1;color:var(--ink)}button:focus-visible,input:focus-visible{outline:3px solid #c7a15f88;outline-offset:2px}.muted{color:var(--muted)}.status{font-size:12px;margin-top:10px;min-height:18px}.orders{display:grid;gap:12px}.order{border:1px solid var(--line);border-radius:9px;padding:16px;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px}.order h3{margin:0 0 7px;font:700 17px Manrope}.order p{margin:4px 0;color:var(--muted);font-size:12px;line-height:1.5}.order .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.order .actions input{min-width:110px}.pill{display:inline-block;background:#f1eee6;border-radius:30px;padding:5px 9px;font-size:11px;font-weight:800}.empty{padding:28px;text-align:center;color:var(--muted)}@media(max-width:760px){.wrap{margin:20px auto}.order{grid-template-columns:1fr}.order .actions{align-items:stretch}.order .actions>*{flex:1}}</style></head><body>
-<header><strong>TENACITY / ORDER DESK</strong><span>Private staff workspace</span></header><main class="wrap">
-<section class="panel"><h2>Staff access</h2><p class="muted">Enter the order admin token configured in Vercel. It stays in this page's memory and is not placed in the URL.</p><div class="row"><div class="field"><label for="token">Admin token</label><input id="token" type="password" autocomplete="current-password" placeholder="TENACITY_ORDER_ADMIN_TOKEN"></div><button id="load">Load quotations</button><button class="ghost" id="clear">Clear token</button></div><p id="notice" class="status" role="status" aria-live="polite"></p></section>
-<section class="panel"><div class="row" style="justify-content:space-between"><div><h2>Quotation requests</h2><p class="muted">Confirm stock and final pricing before approving an order.</p></div><button class="ghost" id="refresh">Refresh list</button></div><div id="orders" class="orders"><div class="empty">Sign in to load orders.</div></div></section></main>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#101426">
+<title>Tenacity | Quotation workspace</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1020;--panel:#151a2d;--panel2:#1b2137;--line:#2b3450;--ink:#f5f4fb;--muted:#a1a9c0;--cyan:#9cecff;--cyan2:#53c9e9;--ember:#ffad68;--green:#8de0bd;--red:#ff9a9e;--radius:18px}
+*{box-sizing:border-box}html{min-height:100%;background:var(--bg)}body{margin:0;min-height:100vh;color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 82% -8%,rgba(93,92,181,.28),transparent 38%),radial-gradient(ellipse at 4% 34%,rgba(44,150,178,.12),transparent 30%),var(--bg);-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}a{color:inherit;text-decoration:none}
+.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 max(22px,calc((100% - 1280px)/2));border-bottom:1px solid rgba(190,207,255,.12);background:rgba(11,14,29,.76);backdrop-filter:blur(18px);position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:800;letter-spacing:.13em}.mark{width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(156,236,255,.4);border-radius:11px;background:linear-gradient(145deg,rgba(156,236,255,.17),rgba(120,100,190,.12));color:var(--cyan);box-shadow:0 0 24px rgba(83,201,233,.12)}.mark svg{width:20px;height:20px}.brand small{display:block;font-size:9px;letter-spacing:.2em;color:var(--muted);font-weight:700;margin-top:2px}.topright{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px}.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(141,224,189,.7);display:inline-block;margin-right:7px}
+.shell{max-width:1280px;margin:0 auto;padding:46px 24px 72px}.intro{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px}.eyebrow{color:var(--cyan);font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-weight:800}.intro h1{font-size:clamp(32px,5vw,54px);line-height:1.02;letter-spacing:-.055em;margin:11px 0 10px;font-weight:750}.intro p{margin:0;color:var(--muted);max-width:580px;font-size:13px}.intro-meta{font-size:11px;color:var(--muted);text-align:right;white-space:nowrap}.intro-meta strong{color:var(--ink);display:block;font-size:13px;margin-bottom:4px}
+.access{background:linear-gradient(115deg,rgba(26,37,62,.96),rgba(21,26,45,.96));border:1px solid rgba(156,236,255,.22);border-radius:var(--radius);padding:20px 22px;margin-bottom:22px;box-shadow:0 18px 55px rgba(0,0,0,.2);position:relative;overflow:hidden}.access:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-80px;top:-155px;background:radial-gradient(circle,rgba(83,201,233,.18),transparent 68%);pointer-events:none}.access-row{display:flex;align-items:end;gap:12px;position:relative;z-index:1}.field{display:grid;gap:7px;flex:1;min-width:190px}label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#c1c9dc}input,select{width:100%;height:44px;border:1px solid #39445f;border-radius:9px;background:#10162a;color:var(--ink);padding:0 13px;outline:none}input::placeholder{color:#77819c}input:focus,select:focus{border-color:var(--cyan2);box-shadow:0 0 0 3px rgba(83,201,233,.12)}.btn{height:44px;border:1px solid transparent;border-radius:9px;padding:0 17px;background:var(--cyan);color:#0d1924;font-weight:800;font-size:12px;transition:transform .2s,background .2s,border-color .2s}.btn:hover{transform:translateY(-1px);background:#c1f3ff}.btn.secondary{background:#252d46;border-color:#3a4562;color:#e9edfa}.btn.secondary:hover{background:#303a58}.btn.danger{background:rgba(255,154,158,.1);border-color:rgba(255,154,158,.35);color:#ffc0c1}.btn.danger:hover{background:rgba(255,154,158,.2)}.statusline{min-height:18px;margin:10px 0 0;color:var(--muted);font-size:11px;position:relative;z-index:1}.statusline.error{color:#ffb1b5}.statusline.success{color:var(--green)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:0 0 22px}.stat{padding:17px 18px;border:1px solid rgba(190,207,255,.13);border-radius:14px;background:linear-gradient(145deg,rgba(27,34,57,.94),rgba(19,24,42,.94));min-height:98px}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.stat-icon{width:27px;height:27px;border-radius:8px;display:grid;place-items:center;color:var(--cyan);background:rgba(156,236,255,.1);font-size:14px}.stat strong{display:block;font-size:28px;line-height:1;margin-top:12px;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.workspace{border:1px solid rgba(190,207,255,.14);border-radius:var(--radius);background:rgba(20,25,44,.94);overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.22)}.workspace-head{padding:22px 22px 18px;display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid var(--line)}.workspace-head h2{font-size:18px;letter-spacing:-.025em;margin:0 0 4px}.workspace-head p{font-size:11px;color:var(--muted);margin:0}.head-actions{display:flex;gap:9px;align-items:center}.toolbar{display:grid;grid-template-columns:minmax(220px,1fr) 190px;gap:10px;padding:14px 22px;border-bottom:1px solid var(--line);background:rgba(10,14,28,.3)}.search{position:relative}.search:before{content:"⌕";position:absolute;left:13px;top:7px;font-size:22px;color:#8e9ab5}.search input{padding-left:39px;height:40px}.toolbar select{height:40px;font-size:12px}
+.orders{display:grid;gap:0}.order{padding:20px 22px;border-bottom:1px solid rgba(190,207,255,.1);display:grid;grid-template-columns:minmax(190px,1.05fr) minmax(210px,1.25fr) minmax(270px,1.5fr);gap:22px;align-items:start;transition:background .2s}.order:last-child{border-bottom:0}.order:hover{background:rgba(156,236,255,.025)}.order-id{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--cyan);margin-bottom:8px}.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(190,207,255,.18);border-radius:99px;padding:5px 9px;font-size:9px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:#d6dced;background:rgba(190,207,255,.06)}.pill:before{content:"";width:6px;height:6px;border-radius:50%;background:#aeb8cf}.pill.approved{color:var(--green);border-color:rgba(141,224,189,.24);background:rgba(141,224,189,.07)}.pill.approved:before,.pill.fulfilled:before{background:var(--green)}.pill.rejected{color:var(--red);border-color:rgba(255,154,158,.24);background:rgba(255,154,158,.07)}.pill.rejected:before{background:var(--red)}.pill.pending{color:var(--ember);border-color:rgba(255,173,104,.24);background:rgba(255,173,104,.07)}.pill.pending:before{background:var(--ember)}.customer-name{font-weight:750;font-size:14px;margin:0 0 5px}.detail{color:var(--muted);font-size:11px;line-height:1.65;margin:3px 0;overflow-wrap:anywhere}.item-list{color:#e5e9f6;font-size:12px;line-height:1.6;margin:0 0 8px}.note{padding:9px 11px;background:rgba(8,12,25,.42);border:1px solid rgba(190,207,255,.1);border-radius:8px;color:#aeb8cf;font-size:11px;line-height:1.55;overflow-wrap:anywhere}.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.actions .price{width:100%;height:38px;margin-bottom:2px}.actions .btn{height:36px;padding:0 12px;font-size:10px}.payment{width:100%;color:var(--muted);font-size:10px;margin-top:2px}.empty{padding:58px 20px;text-align:center;color:var(--muted)}.empty-mark{width:48px;height:48px;border:1px solid #3b4864;border-radius:16px;margin:0 auto 13px;display:grid;place-items:center;color:var(--cyan);font-size:21px;background:rgba(156,236,255,.06)}.empty strong{display:block;color:#e9edf8;margin-bottom:5px}.footer-note{padding:16px 2px;color:#707b98;font-size:10px;text-align:center}
+@media(max-width:900px){.order{grid-template-columns:1fr 1fr}.actions{grid-column:1/-1}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.topbar{height:64px;padding:0 16px}.topright{font-size:10px}.shell{padding:30px 14px 50px}.intro{display:block;margin-bottom:22px}.intro-meta{text-align:left;margin-top:15px}.access{padding:17px}.access-row{align-items:stretch;flex-direction:column}.field{min-width:0}.access-row .btn{width:100%}.stats{gap:8px}.stat{padding:13px;min-height:88px}.stat strong{font-size:24px}.stat-top{font-size:9px}.workspace-head{padding:17px;align-items:flex-start}.workspace-head h2{font-size:16px}.head-actions .btn{padding:0 11px;font-size:10px}.toolbar{grid-template-columns:1fr;padding:12px 14px}.order{grid-template-columns:1fr;gap:13px;padding:17px 15px}.actions{grid-column:auto}.actions .price{width:100%}.actions .btn{flex:1}.payment{margin-top:4px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/" aria-label="Tenacity Locks home">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.8 21 7.5v9L12 21.2 3 16.5v-9L12 2.8Z" stroke="currentColor" stroke-width="1.5"/><path d="M8.2 11.8 11 14.5l5-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span>TENACITY<small>LOCKS · QUOTATION DESK</small></span>
+  </a>
+  <div class="topright"><span><i class="live-dot"></i>PRIVATE WORKSPACE</span></div>
+</header>
+<main class="shell">
+  <div class="intro">
+    <div><div class="eyebrow">Operations / Sales</div><h1>Quotation desk<span style="color:var(--cyan)">.</span></h1><p>Review incoming product enquiries, confirm pricing and move each request through to fulfilment.</p></div>
+    <div class="intro-meta"><strong>Tenacity Locks Ltd</strong>House 41, Kijabe Street · Nairobi</div>
+  </div>
+  <section class="access" aria-labelledby="access-title">
+    <div class="access-row">
+      <div class="field"><label id="access-title" for="token">Staff access key</label><input id="token" type="password" autocomplete="current-password" placeholder="Enter access key" aria-label="Staff access key"></div>
+      <button class="btn" id="load">Unlock workspace</button>
+      <button class="btn secondary" id="clear">Lock workspace</button>
+    </div>
+    <p id="notice" class="statusline" role="status" aria-live="polite"></p>
+  </section>
+  <section class="stats" aria-label="Quotation summary">
+    <article class="stat"><div class="stat-top">Total requests <span class="stat-icon">▤</span></div><strong id="total">—</strong></article>
+    <article class="stat"><div class="stat-top">Awaiting review <span class="stat-icon">◷</span></div><strong id="pending">—</strong></article>
+    <article class="stat"><div class="stat-top">Approved <span class="stat-icon">✓</span></div><strong id="approved">—</strong></article>
+    <article class="stat"><div class="stat-top">Fulfilled <span class="stat-icon">↗</span></div><strong id="fulfilled">—</strong></article>
+  </section>
+  <section class="workspace" aria-labelledby="requests-title">
+    <div class="workspace-head">
+      <div><h2 id="requests-title">Quotation requests</h2><p>Check the requested items and set the confirmed total before approval.</p></div>
+      <div class="head-actions"><button class="btn secondary" id="refresh">↻ &nbsp;Refresh</button></div>
+    </div>
+    <div class="toolbar">
+      <div class="search"><input id="search" type="search" placeholder="Search request, customer or phone…" aria-label="Search quotation requests"></div>
+      <select id="status-filter" aria-label="Filter by status"><option value="all">All statuses</option><option value="pending">Pending review</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="fulfilled">Fulfilled</option></select>
+    </div>
+    <div id="orders" class="orders"><div class="empty"><div class="empty-mark">⌑</div><strong>Workspace locked</strong>Unlock the workspace to view quotation requests.</div></div>
+  </section>
+  <div class="footer-note">TENACITY LOCKS LTD · INTERNAL STAFF ACCESS</div>
+</main>
 <script>
-(()=>{const $=id=>document.getElementById(id);let token="";const say=t=>$("notice").textContent=t;const headers=()=>({Authorization:"Bearer "+token,"Content-Type":"application/json"});async function apiData(response){const raw=await response.text();let data;try{data=raw?JSON.parse(raw):{}}catch{const hint=raw.trim().slice(0,180);console.error("Admin API returned non-JSON:",response.status,hint);throw new Error(response.ok?"The server returned an unreadable response. Please retry.":"The management API returned a server error ("+response.status+"). Check the Vercel function logs; the response was not JSON.")}if(!response.ok)throw new Error(data.error||("Request failed ("+response.status+")."));return data;}
-async function load(){token=$("token").value.trim();if(!token){say("Enter the admin token first.");return}say("Loading orders…");try{const r=await fetch("/api/admin/orders",{headers:headers(),cache:"no-store"}),d=await apiData(r);render(d.orders||[]);say((d.orders||[]).length+" order records loaded.")}catch(e){say(e.message)}}
-function render(items){const root=$("orders");if(!items.length){root.innerHTML='<div class="empty">No quotation requests found.</div>';return}root.replaceChildren(...items.map(o=>{const card=document.createElement("article");card.className="order";const info=document.createElement("div"),customer=document.createElement("div"),actions=document.createElement("div"),h=document.createElement("h3"),badge=document.createElement("span"),details=document.createElement("p"),email=document.createElement("p"),list=document.createElement("p"),notes=document.createElement("p"),payment=document.createElement("p");h.textContent=o.orderNumber;badge.className="pill";badge.textContent=String(o.status).replace(/_/g," ");details.textContent=(o.customer?.name||"Customer")+" · "+(o.customer?.phone||"");email.textContent=o.customer?.email||"No email supplied";info.append(h,badge,details,email);list.textContent=(o.items||[]).map(x=>x.name+" × "+x.quantity).join(" · ");notes.textContent=o.notes||"No extra notes";customer.append(list,notes);payment.textContent="Payment: "+(o.payment?.status||"not due")+(o.payment?.receipt?" · Receipt "+o.payment.receipt:"");const amount=document.createElement("input");amount.type="number";amount.min="1";amount.max="250000";amount.step="1";amount.placeholder="Approved total (KES)";amount.setAttribute("aria-label","Approved total in KES");if(o.amount)amount.value=o.amount;const approve=document.createElement("button");approve.className="gold";approve.textContent="Approve & set price";approve.onclick=()=>update(o.orderNumber,"approved",amount.value);const reject=document.createElement("button");reject.className="ghost";reject.textContent="Reject";reject.onclick=()=>update(o.orderNumber,"rejected");const fulfilled=document.createElement("button");fulfilled.className="ghost";fulfilled.textContent="Mark fulfilled";fulfilled.onclick=()=>update(o.orderNumber,"fulfilled");const remove=document.createElement("button");remove.className="ghost";remove.textContent="Delete request";remove.setAttribute("aria-label","Delete quotation request "+o.orderNumber);remove.onclick=()=>removeOrder(o.orderNumber);actions.className="actions";actions.append(amount,approve,reject,fulfilled,remove,payment);card.append(info,customer,actions);return card}))}
-async function removeOrder(orderNumber){if(!confirm("Permanently delete quotation request "+orderNumber+"? This cannot be undone."))return;try{const r=await fetch("/api/admin/orders",{method:"DELETE",headers:headers(),body:JSON.stringify({orderNumber})}),d=await apiData(r);say("Quotation request "+orderNumber+" deleted.");await load()}catch(e){say(e.message)}}
-async function update(orderNumber,status,amount){if(status==="approved"&&(!Number.isSafeInteger(Number(amount))||Number(amount)<1||Number(amount)>250000)){say("Enter a valid whole-number KES amount.");return}if(!confirm(status==="approved"?"Approve at KSh "+amount+"? The customer can then request an M-Pesa prompt.":"Change "+orderNumber+" to "+status+"?"))return;try{const r=await fetch("/api/admin/orders",{method:"PATCH",headers:headers(),body:JSON.stringify({orderNumber,status,amount:Number(amount)})}),d=await apiData(r);say(orderNumber+" updated.");await load()}catch(e){say(e.message)}}
-$("load").onclick=load;$("refresh").onclick=load;$("clear").onclick=()=>{$("token").value="";token="";$("orders").innerHTML='<div class="empty">Token cleared. Sign in to load orders.</div>';say("Access token cleared.")};
+(()=> {
+  const $=id=>document.getElementById(id);
+  let token="",allOrders=[];
+  const say=(message,type="")=>{const n=$("notice");n.textContent=message;n.className="statusline"+(type?" "+type:"")};
+  const headers=()=>({Authorization:"Bearer "+token,"Content-Type":"application/json"});
+  async function apiData(response){
+    const raw=await response.text();let data;
+    try{data=raw?JSON.parse(raw):{}}catch{console.error("Admin API returned non-JSON:",response.status,raw.slice(0,180));throw new Error(response.ok?"The server returned an unreadable response. Please retry.":"The management API returned a server error ("+response.status+"). Check the Vercel function logs.");}
+    if(!response.ok)throw new Error(data.error||("Request failed ("+response.status+")."));
+    return data;
+  }
+  function updateStats(items){
+    $("total").textContent=items.length;
+    $("pending").textContent=items.filter(o=>!["approved","rejected","fulfilled"].includes(String(o.status).toLowerCase())).length;
+    $("approved").textContent=items.filter(o=>String(o.status).toLowerCase()==="approved").length;
+    $("fulfilled").textContent=items.filter(o=>String(o.status).toLowerCase()==="fulfilled").length;
+  }
+  async function load(){
+    const entered=$("token").value.trim();if(entered)token=entered;
+    if(!token){say("Enter your staff access key to continue.","error");return;}
+    say("Connecting to the quotation desk…");
+    try{
+      const response=await fetch("/api/admin/orders",{headers:headers(),cache:"no-store"});
+      const data=await apiData(response);allOrders=data.orders||[];updateStats(allOrders);render();
+      say(allOrders.length+" quotation request"+(allOrders.length===1?"":"s")+" loaded.","success");
+    }catch(error){say(error.message,"error");}
+  }
+  function render(){
+    const query=$("search").value.trim().toLowerCase(),filter=$("status-filter").value;
+    const items=allOrders.filter(o=>{
+      const status=String(o.status||"pending").toLowerCase();
+      const text=[o.orderNumber,o.customer?.name,o.customer?.phone,o.customer?.email,...(o.items||[]).map(i=>i.name)].join(" ").toLowerCase();
+      return (!query||text.includes(query))&&(filter==="all"||status===filter);
+    });
+    const root=$("orders");
+    if(!allOrders.length){root.innerHTML='<div class="empty"><div class="empty-mark">✧</div><strong>No quotation requests yet</strong>New customer enquiries will appear here.</div>';return;}
+    if(!items.length){root.innerHTML='<div class="empty"><div class="empty-mark">⌕</div><strong>No matching requests</strong>Try another search or status filter.</div>';return;}
+    root.replaceChildren(...items.map(o=>{
+      const card=document.createElement("article");card.className="order";
+      const info=document.createElement("div"),customer=document.createElement("div"),actions=document.createElement("div");
+      const id=document.createElement("div"),badge=document.createElement("span"),name=document.createElement("p"),phone=document.createElement("p"),email=document.createElement("p"),list=document.createElement("p"),notes=document.createElement("div"),payment=document.createElement("div"),amount=document.createElement("input");
+      id.className="order-id";id.textContent=o.orderNumber||"Quotation";
+      const status=String(o.status||"pending").toLowerCase();badge.className="pill "+status;badge.textContent=status.replace(/_/g," ");
+      name.className="customer-name";name.textContent=o.customer?.name||"Customer";
+      phone.className="detail";phone.textContent=o.customer?.phone||"No phone supplied";
+      email.className="detail";email.textContent=o.customer?.email||"No email supplied";
+      info.append(id,badge,name,phone,email);
+      list.className="item-list";list.textContent=(o.items||[]).map(item=>item.name+" × "+item.quantity).join(" · ")||"No item details supplied";
+      notes.className="note";notes.textContent=o.notes||"No additional notes";
+      customer.append(list,notes);
+      amount.className="price";amount.type="number";amount.min="1";amount.max="250000";amount.step="1";amount.placeholder="Confirmed total (KES)";amount.setAttribute("aria-label","Confirmed total in KES for "+(o.orderNumber||"request"));if(o.amount)amount.value=o.amount;
+      const approve=makeButton("Approve & set price","btn",()=>update(o.orderNumber,"approved",amount.value));
+      const reject=makeButton("Reject","btn secondary",()=>update(o.orderNumber,"rejected"));
+      const fulfilled=makeButton("Mark fulfilled","btn secondary",()=>update(o.orderNumber,"fulfilled"));
+      const remove=makeButton("Delete request","btn danger",()=>removeOrder(o.orderNumber));
+      actions.className="actions";actions.append(amount,approve,reject,fulfilled,remove);
+      payment.className="payment";payment.textContent="Payment: "+(o.payment?.status||"not due")+(o.payment?.receipt?" · Receipt "+o.payment.receipt:"");actions.append(payment);
+      card.append(info,customer,actions);return card;
+    }));
+  }
+  function makeButton(label,className,handler){const button=document.createElement("button");button.type="button";button.className=className;button.textContent=label;button.onclick=handler;return button;}
+  async function removeOrder(orderNumber){
+    if(!confirm("Permanently delete quotation request "+orderNumber+"? This cannot be undone."))return;
+    try{const response=await fetch("/api/admin/orders",{method:"DELETE",headers:headers(),body:JSON.stringify({orderNumber})});await apiData(response);say("Quotation request "+orderNumber+" deleted.","success");await load();}
+    catch(error){say(error.message,"error");}
+  }
+  async function update(orderNumber,status,amount){
+    if(status==="approved"&&(!Number.isSafeInteger(Number(amount))||Number(amount)<1||Number(amount)>250000)){say("Enter a valid whole-number KES amount.","error");return;}
+    const prompt=status==="approved"?"Approve at KSh "+amount+"? The customer can then request an M-Pesa prompt.":"Change "+orderNumber+" to "+status+"?";
+    if(!confirm(prompt))return;
+    try{const response=await fetch("/api/admin/orders",{method:"PATCH",headers:headers(),body:JSON.stringify({orderNumber,status,amount:Number(amount)})});await apiData(response);say(orderNumber+" updated.","success");await load();}
+    catch(error){say(error.message,"error");}
+  }
+  $("load").onclick=load;$("refresh").onclick=load;
+  $("search").addEventListener("input",render);$("status-filter").addEventListener("change",render);
+  $("clear").onclick=()=>{token="";$("token").value="";allOrders=[];updateStats([]);$("orders").innerHTML='<div class="empty"><div class="empty-mark">⌑</div><strong>Workspace locked</strong>Unlock the workspace to view quotation requests.</div>';say("Workspace locked.");};
 })();
-</script></body></html>
+</script>
+</body>
+</html>
